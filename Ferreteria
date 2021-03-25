@@ -1,0 +1,41 @@
+registro={}
+precio_final=0
+respuesta_venta = 1
+resp = 1
+
+while resp == 1:
+    print("***MENU***")
+    print("[1] Registrar una venta")
+    print("[2] Consultar una venta")
+    print("[3] Salir")
+    opcion=int(input("Seleccione una opción:\n"))
+    
+    if opcion==1:
+        while respuesta_venta == 1:
+            if registro:
+                clave_venta = max(registro) + 1
+            else:
+                clave_venta = 1
+               
+            descrip_articulo = input ("Descripcion del artículo a capturar: ")
+            cantidad_piezas = int(input("¿Cuántas cantidades necesita?  "))
+            precio_venta = int(input("Indique el precio al que se vendio: $  "))
+            ticket=[descrip_articulo,cantidad_piezas, precio_venta]
+            registro[clave_venta]=ticket
+            precio_final=(precio_final+precio_venta*cantidad_piezas)
+            print(f"{descrip_articulo} // Cantidad de piezas: {cantidad_piezas} // $ {precio_venta}")
+            print(f"El monto final a pagar es de: $ {precio_final}")
+            respuesta_venta = int(input("¿Desea capturar otra venta? \n(1-Si / 0-No): "))
+            
+    if opcion==2:
+        clave_buscar = int(input("Ingrese la clave de venta que desea consultar: "))
+        if clave_buscar in registro.keys():
+            print(registro[clave_buscar])
+            respuesta_venta = int(input("¿Desea capturar otro venta? \n(1-Si / 0-No): "))
+        else:
+            print("Lo sentimos, esa clave de venta no está registrada")
+            respuesta_venta = int(input("¿Desea capturar otra venta? \n(1-Si / 0-No): "))
+            
+    if opcion==3:
+        print("Ha salido correctamente del programa")
+        break
